@@ -15,6 +15,8 @@
     "@mui/icons-material": "^5.14.1",
     "@mui/material": "^5.14.2",
     "ace-builds": "^1.23.4",
+    "axios": "^1.4.0",
+    "openai": "^3.3.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-ace": "^10.1.0",

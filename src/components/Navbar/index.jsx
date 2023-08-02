@@ -7,6 +7,7 @@ import zIndex from "@mui/material/styles/zIndex";
 import LightLogo from "../../assets/Logo.png";
 import { useState } from "react";
 import CheatSheet from "../CheatSheet";
+import BotDialog from "../BotDialog";
 
 // Navbar styles
 const styles = {
@@ -41,12 +42,12 @@ const Navbar = ({ onMenuButtonClick }) => {
     setShowBot(false);
   };
 
-  const handleOpen = (e) => {
-    if (e.target === "bot") {
-      setShowBot(true);
-    } else {
-      setShowSheet(true);
-    }
+  const handleOpenBot = () => {
+    setShowBot(true);
+  };
+
+  const handleOpenSheet = () => {
+    setShowSheet(true);
   };
 
   return (
@@ -64,18 +65,24 @@ const Navbar = ({ onMenuButtonClick }) => {
         <Box sx={styles.navTitle}>
           <img height={"40px"} src={LightLogo} alt="logo" />
         </Box>
-        <Button color="secondary" size="small" name="bot" onClick={handleOpen}>
+        <Button
+          color="secondary"
+          size="small"
+          name="bot"
+          onClick={handleOpenBot}
+        >
           <SmartToyIcon />
         </Button>
         <Button
           color="secondary"
           size="small"
           name="sheet"
-          onClick={handleOpen}
+          onClick={handleOpenSheet}
         >
           <BookIcon />
         </Button>
         <CheatSheet open={showSheet} handleCloseSheet={handleCloseSheet} />
+        <BotDialog open={showBot} handleCloseBot={handleCloseBot} />
       </Toolbar>
     </AppBar>
   );
