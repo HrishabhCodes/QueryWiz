@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.Mui-selected {
+  border: 1px solid #066ec967 !important;
+  background-color: #f1f6fb !important;
+}
+
+li {
+  font-family: "Mukta" !important;
+}
