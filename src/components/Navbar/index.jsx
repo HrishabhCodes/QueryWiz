@@ -1,8 +1,12 @@
-import { Toolbar, AppBar, IconButton, Box } from "@mui/material";
+import { Toolbar, AppBar, IconButton, Box, Button } from "@mui/material";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import BookIcon from "@mui/icons-material/Book";
 import PropTypes from "prop-types";
 import MenuIcon from "@mui/icons-material/Menu";
 import zIndex from "@mui/material/styles/zIndex";
 import LightLogo from "../../assets/Logo.png";
+import { useState } from "react";
+import CheatSheet from "../CheatSheet";
 
 // Navbar styles
 const styles = {
@@ -26,6 +30,25 @@ const styles = {
 };
 
 const Navbar = ({ onMenuButtonClick }) => {
+  const [showBot, setShowBot] = useState(false);
+  const [showSheet, setShowSheet] = useState(false);
+
+  const handleCloseSheet = () => {
+    setShowSheet(false);
+  };
+
+  const handleCloseBot = () => {
+    setShowBot(false);
+  };
+
+  const handleOpen = (e) => {
+    if (e.target === "bot") {
+      setShowBot(true);
+    } else {
+      setShowSheet(true);
+    }
+  };
+
   return (
     <AppBar position="absolute" sx={{ ...styles.appBar }}>
       <Toolbar>
@@ -41,6 +64,18 @@ const Navbar = ({ onMenuButtonClick }) => {
         <Box sx={styles.navTitle}>
           <img height={"40px"} src={LightLogo} alt="logo" />
         </Box>
+        <Button color="secondary" size="small" name="bot" onClick={handleOpen}>
+          <SmartToyIcon />
+        </Button>
+        <Button
+          color="secondary"
+          size="small"
+          name="sheet"
+          onClick={handleOpen}
+        >
+          <BookIcon />
+        </Button>
+        <CheatSheet open={showSheet} handleCloseSheet={handleCloseSheet} />
       </Toolbar>
     </AppBar>
   );

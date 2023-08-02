@@ -1,7 +1,6 @@
 import EmptyList from "./EmptyList";
 import TableItem from "./TableItem";
 import Proptypes from "prop-types";
-// import BookIcon from "@mui/icons-material/Book";
 import { Box, Drawer, List, Typography } from "@mui/material";
 
 // SideBar Styles
