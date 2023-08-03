@@ -15,6 +15,7 @@ import LightLogo from "../../assets/Logo.png";
 import { useState } from "react";
 import CheatSheet from "../CheatSheet";
 import BotDialog from "../BotDialog";
+import { Link } from "react-router-dom";
 
 // Navbar styles
 const styles = {
@@ -70,9 +71,16 @@ const Navbar = ({ onMenuButtonClick }) => {
           <MenuIcon color="textPrimary" />
         </IconButton>
         <Box sx={styles.navTitle}>
-          <img height={"40px"} src={LightLogo} alt="logo" />
+          <Link to="/">
+            <img
+              height={"40px"}
+              src={LightLogo}
+              alt="logo"
+              style={{ marginTop: "5px" }}
+            />
+          </Link>
         </Box>
-        <Tooltip title="Chatbot">
+        <Tooltip title="AI Assistant">
           <Button
             color="secondary"
             size="small"

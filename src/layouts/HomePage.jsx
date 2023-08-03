@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Box, Toolbar } from "@mui/material";
 
-// styles
 const styles = {
   mainContainer: {
     height: "100%",

@@ -10,6 +10,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.MuiTab-root {
+  border-right: 1px solid #2f2f2f67 !important;
+}
+
 .Mui-selected {
   border: 1px solid #066ec967 !important;
   background-color: #f1f6fb !important;

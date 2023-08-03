@@ -14585,16 +14585,7 @@ export const randomDataType = () => {
   return DATATYPES[(DATATYPES.length * Math.random()) << 0];
 };
 
-export const getSyntaxMockData = () => ({
-  table: "Syntax",
-  columns: [
-    { name: "ALTER TABLE" },
-    { name: "ANALYZE" },
-    { name: "CREATE VIEW" },
-    { name: "DROP TABLE" },
-  ],
-});
-
+// Questions to ask from the chatbot
 export const EXAMPLES = [
   {
     id: 1,

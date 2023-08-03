@@ -1,7 +1,6 @@
 import CloseIcon from "@mui/icons-material/Close";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import NoteOutlinedIcon from "@mui/icons-material/NoteOutlined";
-
 import PropTypes from "prop-types";
 import { Box, Tab } from "@mui/material";
 
@@ -33,7 +32,6 @@ const styles = {
   },
 };
 
-/** Custom Tab Component with Delete Button */
 export const CustomTab = ({ tab, onDelete, ...props }) => {
   return (
     <Tab
@@ -56,23 +54,23 @@ export const CustomTab = ({ tab, onDelete, ...props }) => {
           />
         )
       }
-      label={<TabLabel tab={tab} onDelete={onDelete} />}
+      label={<TabLabel tab={tab} onDelete={() => onDelete(tab.id)} />}
       value={tab.value}
       {...props}
     />
   );
 };
 
-// Tab Label
 const TabLabel = ({ tab, onDelete }) => {
-  return tab.canDelete ? (
+  return tab.id !== "home_tab" ? (
     <Box display="flex" alignItems="center">
       {tab.name}
       <CloseIcon
         sx={styles.tabDeleteIcon}
         fontSize="small"
         onClick={(e) => {
-          onDelete(e, tab.id);
+          e.stopPropagation();
+          onDelete();
         }}
       />
     </Box>

@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 
-// SideBar Styles
 const styles = {
   drawerPaper: {
     whiteSpace: "nowrap",
@@ -36,7 +35,6 @@ const styles = {
   },
 };
 
-// SideBar Component
 const SideBar = ({ showDrawer = true, items = [] }) => {
   return (
     <Drawer

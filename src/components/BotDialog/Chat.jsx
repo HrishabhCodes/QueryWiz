@@ -24,7 +24,6 @@ const Chat = ({ chat, isLoading }) => {
         width: "100%",
         bgcolor: "background.paper",
         padding: 0,
-        // overflow: "auto",
       }}
     >
       {chat.map((message, i) => {

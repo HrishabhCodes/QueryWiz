@@ -1,10 +1,5 @@
 import { useState } from "react";
 
-/**
- *
- * @param {number} duration
- * Custom hook to handle toast for alerts
- */
 export const useToast = (duration = 3000) => {
   // state for  toast info
   const [toastVisible, setToastVisible] = useState(false);

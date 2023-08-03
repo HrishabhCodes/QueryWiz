@@ -8,7 +8,7 @@ const EditorLoader = () => {
       alignItems="center"
       justifyContent="center"
     >
-      <Typography>Setting up Editor, Please Wait ...</Typography>
+      <Typography>Setting up the Editor, Please Wait ...</Typography>
     </Box>
   );
 };

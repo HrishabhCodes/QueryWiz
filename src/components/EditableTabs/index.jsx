@@ -1,9 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import CustomTab from "./CustomTab";
-import { useState, useCallback } from "react";
-
-import PropTypes from "prop-types";
 import { Box, Button, Grid, Tabs } from "@mui/material";
+import useAppContext from "../../hooks/useAppContext";
 
 const styles = {
   tabsContainer: {
@@ -16,7 +14,6 @@ const styles = {
   },
 };
 
-// styles for tabs Wrapper
 const wrapperStyles = {
   "& .MuiTabs-root": {
     flex: 1,
@@ -30,38 +27,38 @@ const wrapperStyles = {
   },
 };
 
-// Component to create list of Editable tabs i.e allowing to add/delete tabs
-const EditableTabs = ({
-  tabsList = [],
-  onTabChange,
-  onTabDelete,
-  onTabAdd,
-}) => {
-  const [tabValue, setTabValue] = useState(0);
+const EditableTabs = () => {
+  const { tabs, setTabs, currentTab, setCurrentTab } = useAppContext();
 
-  const handleTabChange = (event, value) => {
-    onTabChange({ prev: tabsList[tabValue], next: tabsList[value] });
-    setTabValue(value);
+  const deleteTab = (index) => {
+    if (currentTab.value === index) {
+      setCurrentTab(tabs[currentTab.value - 1]);
+    }
+    let tempTabs = tabs.filter((tab) => tab.value !== index);
+    for (let i = 1; i < tempTabs.length; i++) {
+      const tab = { ...tempTabs[i], id: `new_tab_${i}`, value: i };
+      tempTabs[i] = tab;
+    }
+    if (currentTab.value > index) {
+      setCurrentTab((prev) => ({ ...prev, value: prev.value - 1 }));
+    }
+    setTabs([...tempTabs]);
   };
 
   const addTab = () => {
-    onTabAdd().then(() => {
-      setTabValue(tabsList.length);
-    });
+    const newTab = {
+      id: `new_tab_${tabs.length}`,
+      name: `New Tab`,
+      query: "",
+      value: tabs.length,
+    };
+    setTabs((prev) => [...prev, newTab]);
+    setCurrentTab(newTab);
   };
 
-  const deleteTab = useCallback(
-    (e, tabId) => {
-      e.stopPropagation();
-      if (tabsList.length === 1) {
-        return;
-      }
-
-      onTabDelete(tabId);
-      setTabValue((value) => value - 1);
-    },
-    [tabsList, onTabDelete]
-  );
+  const handleTabChange = (event, value) => {
+    setCurrentTab(tabs[value]);
+  };
 
   return (
     <Grid
@@ -75,13 +72,19 @@ const EditableTabs = ({
           sx={wrapperStyles}
           onChange={handleTabChange}
           aria-label="editor-tabs"
-          value={tabValue}
+          value={currentTab.value}
           variant="scrollable"
           textColor="secondary"
           indicatorColor="secondary"
         >
-          {tabsList.map((tab) => (
-            <CustomTab tab={tab} key={tab.id} onDelete={deleteTab} />
+          {tabs.map((tab, i) => (
+            <CustomTab
+              tab={tab}
+              key={tab.id}
+              onDelete={() => {
+                deleteTab(i);
+              }}
+            />
           ))}
         </Tabs>
       </Box>
@@ -102,10 +105,3 @@ const EditableTabs = ({
 };
 
 export default EditableTabs;
-
-EditableTabs.propTypes = {
-  tabsList: PropTypes.array,
-  onTabAdd: PropTypes.func.isRequired,
-  onTabChange: PropTypes.func.isRequired,
-  onTabDelete: PropTypes.func.isRequired,
-};

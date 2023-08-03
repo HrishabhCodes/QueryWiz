@@ -7,7 +7,6 @@ import WorkArea from "../components/WorkArea";
 
 const Home = () => {
   const [showDrawer, setShowDrawer] = useState(true);
-
   const { tablesData } = useAppContext();
 
   const toggleDrawerState = useCallback(() => {

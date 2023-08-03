@@ -1,15 +1,13 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import Toast from "../Toast";
-import useActiveQueryEditor from "../../hooks/useActiveQueryEditor";
 import useToast from "../../hooks/useToast";
 import PropTypes from "prop-types";
-import { DEFAULT_STRINGS } from "../../utils/common";
 import { v4 as uuid } from "uuid";
 import EditorControls from "./EditorControls";
 import EditorLoader from "./EditorLoader";
 import { Box } from "@mui/material";
+import useAppContext from "../../hooks/useAppContext";
 
-// Lazy loading Editor
 const LazyEditor = React.lazy(() => import("./LazyEditor"));
 
 const styles = {
@@ -20,8 +18,8 @@ const styles = {
 };
 
 const QueryEditor = ({ onRunQuery }) => {
-  const { currentQuery, handleQueryChange, editorTabs, updateEditorTabs } =
-    useActiveQueryEditor();
+  const { currentTab, setCurrentTab, setTabs } = useAppContext();
+  const [currentQuery, setCurrentQuery] = useState(currentTab.query);
   const { isToastVisible, showToast, toastType, toastMessage } = useToast();
 
   const handleRunQuery = () => {
@@ -36,13 +34,24 @@ const QueryEditor = ({ onRunQuery }) => {
     );
   };
 
+  const handleQueryChange = (value) => {
+    setCurrentQuery(value);
+    const tempTab = currentTab;
+    tempTab.query = value;
+    setCurrentTab({ ...tempTab });
+    setTabs((prevTabs) => {
+      return prevTabs.map((tab) => {
+        if (tab.id === currentTab.id) {
+          return { ...tab, query: value };
+        }
+        return tab;
+      });
+    });
+  };
+
   return (
     <Box>
-      <EditorControls
-        editorTabs={editorTabs}
-        updateEditorTabs={updateEditorTabs}
-        onRunQuery={handleRunQuery}
-      />
+      <EditorControls onRunQuery={handleRunQuery} />
       <Suspense fallback={<EditorLoader />}>
         <LazyEditor
           aria-label="query editor input"
@@ -56,14 +65,14 @@ const QueryEditor = ({ onRunQuery }) => {
           showPrintMargin={false}
           showGutter
           highlightActiveLine={false}
-          placeholder={DEFAULT_STRINGS.QUERY_EDITOR_PLACEHOLDER}
+          placeholder={"Write Query Here ..."}
           editorProps={{ $blockScrolling: true }}
           setOptions={{
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
             enableSnippets: true,
           }}
-          value={currentQuery}
+          value={currentTab.query}
           onChange={handleQueryChange}
           style={styles.editorStyles}
           showLineNumbers
@@ -78,4 +87,5 @@ export default QueryEditor;
 
 QueryEditor.propTypes = {
   onRunQuery: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
 };

@@ -16,14 +16,10 @@ const TableRowDialog = ({
   handleCancelAction,
   handleSuccessAction,
 }) => {
-  console.log(row);
-
   const allColumns = useMemo(
     () => Object.keys(row).map((column) => column),
     [row]
   );
-
-  console.log(allColumns);
 
   return (
     <Dialog

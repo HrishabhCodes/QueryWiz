@@ -2,15 +2,11 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import EditableTabs from "../EditableTabs";
 import MenuButton from "../MenuButton";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
-import {
-  EDITOR_TAB_ADD,
-  EDITOR_TAB_CHANGE,
-  EDITOR_TAB_DELETE,
-} from "../../utils/common";
 import PropTypes from "prop-types";
 import { Box, Button, Paper, Tooltip } from "@mui/material";
+import useAppContext from "../../hooks/useAppContext";
+import { useNavigate } from "react-router-dom";
 
-// Editor Controls Styles
 const styles = {
   "& .MuiPaper-root": {
     display: "flex",
@@ -27,19 +23,33 @@ const styles = {
   },
 };
 
-const EditorControls = ({ editorTabs = [], updateEditorTabs, onRunQuery }) => {
+const EditorControls = ({ onRunQuery }) => {
+  const navigate = useNavigate();
+  const {
+    setWorkspaces,
+    tabs,
+    currentWorkspace,
+    setCurrentWorkspace,
+    setTabs,
+  } = useAppContext();
+
+  const onSaveWorkspace = () => {
+    setWorkspaces((prevWorkspaces) => {
+      return prevWorkspaces.map((workspace) => {
+        if (workspace.id === currentWorkspace) {
+          return { ...workspace, tabs: tabs };
+        }
+        return workspace;
+      });
+    });
+    setTabs([]);
+    setCurrentWorkspace("");
+    navigate("/");
+  };
+
   return (
     <Paper square sx={styles["& .MuiPaper-root"]}>
-      <EditableTabs
-        tabsList={editorTabs}
-        onTabAdd={() => updateEditorTabs({ type: EDITOR_TAB_ADD })}
-        onTabDelete={(tabId) =>
-          updateEditorTabs({ type: EDITOR_TAB_DELETE, data: { id: tabId } })
-        }
-        onTabChange={(data) => {
-          updateEditorTabs({ type: EDITOR_TAB_CHANGE, data });
-        }}
-      />
+      <EditableTabs />
       <Box sx={styles.editorButtonsWrapper} display="flex">
         <Tooltip title="Run">
           <Button
@@ -62,7 +72,7 @@ const EditorControls = ({ editorTabs = [], updateEditorTabs, onRunQuery }) => {
             color="secondary"
             size="small"
             sx={styles.editorButton}
-            // onClick={onSaveQuery}
+            onClick={onSaveWorkspace}
           >
             <SaveRoundedIcon />
           </Button>
@@ -77,8 +87,6 @@ const EditorControls = ({ editorTabs = [], updateEditorTabs, onRunQuery }) => {
 };
 
 EditorControls.propTypes = {
-  editorTabs: PropTypes.array,
-  updateEditorTabs: PropTypes.func.isRequired,
   onRunQuery: PropTypes.func.isRequired,
 };
 

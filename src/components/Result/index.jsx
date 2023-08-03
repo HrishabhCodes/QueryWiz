@@ -40,7 +40,6 @@ const styles = {
   },
 };
 
-//  Generate and return the metadata with info needed for table Header
 const getTableHeaderCells = (metaData) => {
   return (
     metaData &&
@@ -54,18 +53,15 @@ const getTableHeaderCells = (metaData) => {
 };
 
 const ResultTable = ({ tableData = {} }) => {
-  // state for paginatination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const { rows: tableRows = [], metaData } = tableData;
 
-  // handles pagination change
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  // handles number of result to be show per page
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
