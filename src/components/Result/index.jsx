@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Proptypes from "prop-types";
 import TableHeader from "./TableHeader";
 import TableRowDialog from "./TableRowDialog";
@@ -57,6 +57,10 @@ const ResultTable = ({ tableData = {} }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const { rows: tableRows = [], metaData } = tableData;
+
+  useEffect(() => {
+    setPage(0);
+  }, [tableData]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
