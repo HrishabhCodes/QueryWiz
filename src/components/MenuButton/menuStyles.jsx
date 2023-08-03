@@ -1,20 +1,16 @@
-const minWidth = "140px";
-
 const styles = {
   button: {
-    minWidth: minWidth,
-    fontWeight: 500,
-    textTransform: "capitalize",
-    paddingTop: "8px",
-    paddingBottom: "8px",
-    "& > span": {
-      fontSize: "0.9em",
-    },
+    marginRight: "8px",
+    minWidth: "fit-content",
+    padding: "3px 9px",
   },
   downloadIcon: {
     userSelect: "none",
     pointerEvents: "none",
-    marginRight: "8px",
+  },
+  uploadIcon: {
+    userSelect: "none",
+    pointerEvents: "none",
   },
   downIcon: {
     userSelect: "none",
@@ -26,7 +22,6 @@ const styles = {
     transform: "rotate(180deg)",
   },
   "& .MuiMenu-paper": {
-    minWidth: minWidth,
     borderRadius: "4px",
     marginTop: "8px",
   },

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./menuStyles";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import GetAppRoundedIcon from "@mui/icons-material/GetAppRounded";
+import PublishRoundedIcon from "@mui/icons-material/PublishRounded";
 import PropTypes from "prop-types";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem, Tooltip } from "@mui/material";
 
-const MenuButton = ({ title = "", menuItems = [], onMenuItemClick }) => {
+const MenuButton = ({ title = "", menuItems = [] }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -16,13 +16,12 @@ const MenuButton = ({ title = "", menuItems = [], onMenuItemClick }) => {
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (item) => {
-    onMenuItemClick(item);
+  const handleMenuItemClick = () => {
     handleClose();
   };
 
   return (
-    <div>
+    <Tooltip title={title}>
       <Button
         variant="outlined"
         color="secondary"
@@ -31,9 +30,11 @@ const MenuButton = ({ title = "", menuItems = [], onMenuItemClick }) => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <GetAppRoundedIcon sx={styles.downloadIcon} />
-        <span>{title}</span>
-        <ExpandMoreIcon sx={anchorEl ? styles.upIcon : styles.downIcon} />
+        {title === "Export" ? (
+          <GetAppRoundedIcon sx={styles.downloadIcon} />
+        ) : (
+          <PublishRoundedIcon sx={styles.uploadIcon} />
+        )}
       </Button>
 
       <Menu
@@ -66,7 +67,7 @@ const MenuButton = ({ title = "", menuItems = [], onMenuItemClick }) => {
           </MenuItem>
         ))}
       </Menu>
-    </div>
+    </Tooltip>
   );
 };
 
@@ -75,5 +76,4 @@ export default MenuButton;
 MenuButton.propTypes = {
   title: PropTypes.string.isRequired,
   menuItems: PropTypes.array.isRequired,
-  onMenuItemClick: PropTypes.func,
 };

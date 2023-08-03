@@ -1,13 +1,14 @@
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import EditableTabs from "../EditableTabs";
 import MenuButton from "../MenuButton";
+import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import {
   EDITOR_TAB_ADD,
   EDITOR_TAB_CHANGE,
   EDITOR_TAB_DELETE,
 } from "../../utils/common";
 import PropTypes from "prop-types";
-import { Box, Button, Paper } from "@mui/material";
+import { Box, Button, Paper, Tooltip } from "@mui/material";
 
 // Editor Controls Styles
 const styles = {
@@ -40,18 +41,34 @@ const EditorControls = ({ editorTabs = [], updateEditorTabs, onRunQuery }) => {
         }}
       />
       <Box sx={styles.editorButtonsWrapper} display="flex">
-        <Button
-          variant="outlined"
-          color="secondary"
-          size="small"
-          startIcon={<PlayArrowRoundedIcon />}
-          sx={styles.editorButton}
-          onClick={onRunQuery}
-        >
-          Run Query
-        </Button>
+        <Tooltip title="Run">
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="small"
+            sx={styles.editorButton}
+            onClick={onRunQuery}
+          >
+            <PlayArrowRoundedIcon />
+          </Button>
+        </Tooltip>
         <MenuButton
-          title="EXPORT"
+          title="Export"
+          menuItems={["CSV File", "XML File", "JSON File"]}
+        />
+        <Tooltip title="Save">
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="small"
+            sx={styles.editorButton}
+            // onClick={onSaveQuery}
+          >
+            <SaveRoundedIcon />
+          </Button>
+        </Tooltip>
+        <MenuButton
+          title="Import"
           menuItems={["CSV File", "XML File", "JSON File"]}
         />
       </Box>
