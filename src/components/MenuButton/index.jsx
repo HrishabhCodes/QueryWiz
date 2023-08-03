@@ -21,21 +21,23 @@ const MenuButton = ({ title = "", menuItems = [] }) => {
   };
 
   return (
-    <Tooltip title={title}>
-      <Button
-        variant="outlined"
-        color="secondary"
-        sx={styles.button}
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-      >
-        {title === "Export" ? (
-          <GetAppRoundedIcon sx={styles.downloadIcon} />
-        ) : (
-          <PublishRoundedIcon sx={styles.uploadIcon} />
-        )}
-      </Button>
+    <>
+      <Tooltip title={title}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          sx={styles.button}
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          {title === "Export" ? (
+            <GetAppRoundedIcon sx={styles.downloadIcon} />
+          ) : (
+            <PublishRoundedIcon sx={styles.uploadIcon} />
+          )}
+        </Button>
+      </Tooltip>
 
       <Menu
         id="simple-menu"
@@ -67,7 +69,7 @@ const MenuButton = ({ title = "", menuItems = [] }) => {
           </MenuItem>
         ))}
       </Menu>
-    </Tooltip>
+    </>
   );
 };
 

@@ -21,4 +21,5 @@ li {
 
 .command-containers::-webkit-scrollbar {
   display: none;
+  color: #003c77;
 }

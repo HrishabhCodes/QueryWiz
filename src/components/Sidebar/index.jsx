@@ -1,7 +1,17 @@
 import EmptyList from "./EmptyList";
 import TableItem from "./TableItem";
 import Proptypes from "prop-types";
-import { Box, Drawer, List, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  ButtonBase,
+  Drawer,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 
 // SideBar Styles
 const styles = {
@@ -12,6 +22,8 @@ const styles = {
     transition: "width 250ms cubic-bezier(0.4, 0, 0.2, 1)",
     width: "240px",
     backgroundColor: "background.dark",
+    display: "flex",
+    flexDirection: "column",
   },
   drawerPaperClose: {
     overflowX: "hidden",
@@ -29,11 +41,15 @@ const SideBar = ({ showDrawer = true, items = [] }) => {
   return (
     <Drawer
       variant="permanent"
+      className="sidebar"
       sx={
         showDrawer
           ? {
               ...styles.drawerPaper,
               "& .MuiDrawer-paper": { ...styles.drawerPaper },
+              "& .MuiPaper-root::-webkit-scrollbar": {
+                display: "none",
+              },
             }
           : {
               ...styles.drawerPaperClose,
@@ -42,7 +58,7 @@ const SideBar = ({ showDrawer = true, items = [] }) => {
       }
       open={showDrawer}
     >
-      <Box p={2}>
+      <Box sx={{ height: "10%" }} p={2}>
         <Typography sx={styles.primaryColor} variant="h6">
           Tables Schema
         </Typography>
@@ -54,7 +70,7 @@ const SideBar = ({ showDrawer = true, items = [] }) => {
           subtitle={"Please import data to the Editor"}
         />
       ) : (
-        <List>
+        <List sx={{ height: "75%" }}>
           {items.map((item, index) => (
             <TableItem
               key={`${item.table}-${index}-table-metadata`}
@@ -63,6 +79,63 @@ const SideBar = ({ showDrawer = true, items = [] }) => {
           ))}
         </List>
       )}
+      <List
+        sx={{
+          height: "15%",
+          width: "100%",
+        }}
+      >
+        <ButtonBase
+          sx={{
+            width: "100%",
+          }}
+        >
+          <ListItem
+            sx={{
+              padding: "0 16px",
+              width: "100%",
+              backgroundColor: "#003c77",
+              "& .MuiListItem-root": {
+                width: "100%",
+              },
+              "& .MuiTouchRipple-root": {
+                width: "100%",
+              },
+            }}
+            alignItems="flex-start"
+          >
+            <ListItemAvatar>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoq0f1tSU2b8opZaApGh5tl2FreFb52dyo6Q&usqp=CAU"
+              />
+            </ListItemAvatar>
+            <ListItemText
+              primary={
+                <>
+                  <Typography sx={{ fontWeight: 600 }} color="white">
+                    Log Out
+                  </Typography>
+                </>
+              }
+              secondary={
+                <>
+                  <Typography
+                    sx={{
+                      display: "inline",
+                    }}
+                    component="span"
+                    variant="body2"
+                    color="white"
+                  >
+                    HrishabhCodes
+                  </Typography>
+                </>
+              }
+            />
+          </ListItem>
+        </ButtonBase>
+      </List>
     </Drawer>
   );
 };

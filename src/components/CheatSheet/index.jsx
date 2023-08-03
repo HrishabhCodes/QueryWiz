@@ -80,6 +80,9 @@ const CheatSheet = ({ open, handleCloseSheet }) => {
                     marginTop: "15px",
                     cursor: "pointer",
                     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                    ":hover": {
+                      backgroundColor: "#e3e3e3",
+                    },
                   }}
                   key={`${queryObj.type}_${i + 1}`}
                 >
