@@ -68,7 +68,7 @@ const SideBar = ({ showDrawer = true, items = [] }) => {
           subtitle={"Please import data to the Editor"}
         />
       ) : (
-        <List sx={{ height: "75%" }}>
+        <List sx={{ height: "75%", overflow: "auto" }}>
           {items.map((item, index) => (
             <TableItem
               key={`${item.table}-${index}-table-metadata`}

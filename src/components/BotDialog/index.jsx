@@ -134,8 +134,16 @@ const BotDialog = ({ open, handleCloseBot }) => {
             }}
             fullWidth
           />
-          <IconButton disableRipple onClick={sendMessage}>
-            <SendRoundedIcon />
+          <IconButton
+            disableRipple
+            onClick={() => {
+              if (isLoading) return;
+              sendMessage();
+            }}
+          >
+            <SendRoundedIcon
+              color={isLoading ? "secondary" : "primaryButton"}
+            />
           </IconButton>
         </Box>
       </Box>
