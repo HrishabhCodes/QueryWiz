@@ -6,6 +6,9 @@
 
 QueryWiz is a web-based SQL editor that allows users to input SQL queries and view the results of those queries. The application includes a space to enter SQL commands and displays a table with dummy data in response to the queries. It provides a user-friendly interface for data analysts to work efficiently. The SQL editor is built using **React with Vite** as it is fast, lightweight and easy to use. The project includes some additional packages for enhanced functionality.
 
+## Demo
+https://github.com/HrishabhCodes/QueryWiz/assets/71200145/3ce122c2-3361-4bd1-b47c-4994951f03fd
+
 ## Packages
 
 - [Material UI](https://mui.com/)
@@ -25,6 +28,8 @@ QueryWiz is a web-based SQL editor that allows users to input SQL queries and vi
 ## Load Time
 
 Page Load Time has been measured using the Lighthouse Tool, a robust performance analysis tool that evaluates web pages' loading speed and provides actionable insights for optimization. This data ensures that QueryWiz delivers a seamless user experience, with efficient loading times for enhanced productivity and satisfaction.
+
+<img width="864" alt="Screenshot 2023-08-04 at 4 15 09 PM" src="https://github.com/HrishabhCodes/QueryWiz/assets/71200145/3969a56f-900f-45d5-86cb-d0b435752f6a">
 
 ## Optimizations
 
